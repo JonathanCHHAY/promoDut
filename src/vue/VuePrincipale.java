@@ -22,6 +22,7 @@ public class VuePrincipale extends JFrame {
 	private GridBagConstraints cont;
 	
 	private VueFormulaire form;
+	private VueListe liste;
 	
 	public VuePrincipale() {
 
@@ -36,22 +37,28 @@ public class VuePrincipale extends JFrame {
 	
 	public void init() {
 		
+		// Création 
 		pano = new JDesktopPane();
-        //pano.setLayout(new GridBagLayout());
-        //cont = new GridBagConstraints();
         pano.setVisible(true);
         
 		form = new VueFormulaire();        
         form.setVisible(true);
         
-        cont.gridx = 0;
-        cont.gridy = 0;
+        liste = new VueListe();
+        liste.setVisible(true);
+        
+        // Placement        
         this.setContentPane(pano);
         
-        this.add(form);
-        form.setLocation(new Point(0, 0));
-        this.setPreferredSize(new Dimension(1300, 600));
-        this.pack();
+        pano.add(form);
+        form.setLocation(0,0);
+        
+        pano.add(liste);
+        liste.setLocation(0, form.getHeight());
+        
+        // Réglage taille fenêtre
+        this.setSize(1000, 600);
+        //this.pack();
 		
 	}
 }

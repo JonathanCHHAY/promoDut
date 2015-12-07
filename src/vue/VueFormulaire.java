@@ -1,6 +1,5 @@
 package vue;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -59,9 +58,28 @@ public class VueFormulaire extends JInternalFrame {
 		String[] bacs = { "S", "STI", "ES" };
 		listeBac = new JComboBox<String>( bacs );
 		
-		String[] dpt = { "Informatique", "GEA", "Biologie", "GTE" };
-		listeDpt = new JComboBox<String>( dpt );
+		listeDpt = new JComboBox<String>();
 		
+		// Ajout des départements à la combobox
+		for ( int i = 1 ; i <= 95 ; i++ ) {
+			
+			// Pour la Corse
+			if ( i == 20 ) {			
+				listeDpt.addItem("2A");
+				listeDpt.addItem("2B");
+			}
+			else {
+				listeDpt.addItem(Integer.toString(i));
+			}
+		}
+		
+		// Dpt d'outre-mer
+		listeDpt.addItem(Integer.toString(971));
+		listeDpt.addItem(Integer.toString(972));
+		listeDpt.addItem(Integer.toString(973));
+		listeDpt.addItem(Integer.toString(974));
+		listeDpt.addItem(Integer.toString(976));
+				
 		btAjout = new JButton("Ajout");
 		btSuppr = new JButton("Supprimer");
 		
@@ -82,8 +100,7 @@ public class VueFormulaire extends JInternalFrame {
         	pano.add(lbNumEtuAj, cont);
         	cont.gridx = 1;
         	pano.add(tfNumAj, cont);
-        
-        	
+
         	// Prenom
 	        cont.gridx = 2;
 	        pano.add(lbPrenom, cont);
