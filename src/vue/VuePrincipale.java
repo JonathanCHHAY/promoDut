@@ -37,8 +37,8 @@ public class VuePrincipale extends JFrame {
 	public void init() {
 		
 		pano = new JDesktopPane();
-        pano.setLayout(new GridBagLayout());
-        cont = new GridBagConstraints();
+        //pano.setLayout(new GridBagLayout());
+        //cont = new GridBagConstraints();
         pano.setVisible(true);
         
 		form = new VueFormulaire();        
@@ -48,7 +48,7 @@ public class VuePrincipale extends JFrame {
         cont.gridy = 0;
         this.setContentPane(pano);
         
-        this.add(form, cont);
+        this.add(form);
         form.setLocation(new Point(0, 0));
         this.setPreferredSize(new Dimension(1300, 600));
         this.pack();
