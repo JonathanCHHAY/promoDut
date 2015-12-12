@@ -29,6 +29,7 @@ public class VuePrincipale extends JFrame {
 	private VueFormulaire form;
 	private VueListe liste;
 	private VueCamembert camembert;
+	private VueHistogramme histogramme;
 	
 	public VuePrincipale( Promotion promo) {
 
@@ -57,6 +58,9 @@ public class VuePrincipale extends JFrame {
         camembert = new VueCamembert(promo);
         camembert.setVisible(true);
         
+        histogramme = new VueHistogramme(promo);
+        histogramme.setVisible(true);
+        
         // Placement        
         this.setContentPane(pano);
         
@@ -66,11 +70,14 @@ public class VuePrincipale extends JFrame {
         pano.add(camembert);
         camembert.setLocation(0, form.getHeight());
         
+        pano.add(histogramme);
+        histogramme.setLocation(camembert.getWidth(), form.getHeight());
+        
         pano.add(liste);
-        liste.setLocation(camembert.getWidth(), form.getHeight());
+        liste.setLocation(camembert.getWidth(), 0);
         
         // Réglage taille fenêtre
-        this.setSize(1000, 650);
+        this.setSize(1500, 650);
 		
 	}
 }

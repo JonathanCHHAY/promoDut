@@ -31,7 +31,6 @@ public class VueCamembert extends JInternalFrame {
 		this.promo = promo;
 		
 		this.pack();
-		this.setVisible(true);
 	}
 	
 

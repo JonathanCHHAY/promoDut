@@ -1,27 +1,38 @@
 package vue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.jar.JarException;
 
 import javax.swing.JInternalFrame;
 
 import modele.Etudiant;
 import modele.Promotion;
 
+import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.DatasetRenderingOrder;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xml.DatasetReader;
 
 public class VueHistogramme extends JInternalFrame {
 
 	private Promotion promo;
+	Histogramme histo;
 	
 	public VueHistogramme(Promotion promo) {
 
 		this.promo = promo;
-		Histogramme histo = new Histogramme(promo);
 		this.setTitle("Bacs d'origine");
+		
+		this.histo = new Histogramme(promo);
+		this.add(histo);
+		this.pack();
 		
 	}
 	
@@ -36,42 +47,69 @@ public class VueHistogramme extends JInternalFrame {
 		public Histogramme(Promotion promo ) {
 
 			super(null);
+			this.promo = promo;
+			genereData();
 			init();
+			this.setChart(barChart);
 		}
-	}
-	
-	public void init() {
 		
-		
-	}
-	
-	public void genereData() {
-		
-		 = new DefaultPieDataset();
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		
-		ArrayList<Etudiant> list = promo.getListeEtudiants();
-		
-		for( int i = 0 ; i < list.size() ; i++ ) {
+		public void init() {
 			
-			if ( map.get(list.get(i).getDpt()) != null) {
+			barChart = ChartFactory.createBarChart3D(
+		            "Séries de bac",      // chart title
+		            "Bacs",               // domain axis label
+		            "Nombre",                  // range axis label
+		            dataset,                  // data
+		            PlotOrientation.VERTICAL, // orientation
+		            true,                     // include legend
+		            true,                     // tooltips
+		            false                     // urls
+		        );
+		}
+		
+		public void genereData() {
+			
+			
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			
+			ArrayList<Etudiant> list = promo.getListeEtudiants();
+			
+			for( int i = 0 ; i < list.size() ; i++ ) {
 				
-				map.put(list.get(i).getDpt(), map.get(list.get(i).getDpt()) + 1);
+				if ( map.get(list.get(i).getSerieBac()) != null) {
+					
+					map.put(list.get(i).getSerieBac(), map.get(list.get(i).getSerieBac()) + 1);
+				}
+				
+				else {
+					
+					map.put(list.get(i).getSerieBac(), 1);
+				}
+				
 			}
 			
-			else {
-				
-				map.put(list.get(i).getDpt(), 1);
+			Object t[] = map.values().toArray();
+			Arrays.sort(t);
+			
+			try {
+				double datas[][] = new double[6][1];
+				datas[0][0] = map.get("S");
+				//System.out.println(map.get("S"));
+				//System.out.println(datas[0][0]);
+				datas[1][0] = map.get("ES");
+				datas[2][0] = map.get("STI");
+				//datas[2][0] = map.get("STL");
+
+				dataset = DatasetUtilities.createCategoryDataset("", " ", datas);
 			}
 			
-		}
-		
-		Object t[] = map.keySet().toArray();
-		//Arrays.sort(i);
-		
-		for( int i = 0 ; i < t.length ; i++ ) {
+			catch (java.lang.NullPointerException e) {
+				
+				System.out.println("Pb récup étus d'un bac");
+			}
 			
-			pieDataset.setValue((String) t[i], map.get((String) t[i]));
-		}
+	}
+	
+	
 	}
 }

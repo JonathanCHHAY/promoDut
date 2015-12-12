@@ -2,8 +2,11 @@ package vue;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -17,6 +20,7 @@ public class VueListe extends JInternalFrame {
 
 	private JList jListe;
 	private ArrayList<String> listeEtu;
+	private JButton btSuppr;
 	//private String[] listeEtu ;
 	private Promotion promo;
 	
@@ -26,8 +30,22 @@ public class VueListe extends JInternalFrame {
 	public VueListe(Promotion promo) {
 		
 		this.promo = promo;
+		init();
+		
+		btSuppr.addActionListener( new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				System.out.println("Suppr d'un étu (depuis liste)");
+			}
+		});
+	}
+	
+	public void init() {
+		
 		listeEtu = new ArrayList<String>();
-
+		btSuppr = new JButton("Supprimer");
 		loadListe();
 		
 		jListe = new JList(listeEtu.toArray());
@@ -46,18 +64,11 @@ public class VueListe extends JInternalFrame {
 		cont.gridy = 0;
 		
 		this.add(scrollPane, cont);
-		//this.add(jListe);
 		
-		//System.out.println(promo.getListeEtudiants().size());
+		cont.gridx = 0;
+		cont.gridy = 1;
+		this.add(btSuppr, cont);
 		
-		//pano new JPanel()
-		
-		//for ( int = 0 ; )
-		//jListe.setL
-		
-		//jListe.add
-		
-		//this.add(jListe);
 		this.pack();
 	}
 	

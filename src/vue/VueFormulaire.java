@@ -2,6 +2,8 @@ package vue;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,6 +29,24 @@ public class VueFormulaire extends JInternalFrame {
         
 		cont = new GridBagConstraints();
 		init();
+		
+		btAjout.addActionListener( new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				System.out.println("Aj d'un étu");
+			}
+		});
+		
+		btSuppr.addActionListener( new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				System.out.println("Suppr d'un étu");
+			}
+		});
 	}
 	
 	public void init() {
