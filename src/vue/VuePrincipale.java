@@ -8,24 +8,31 @@ import java.awt.Point;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
+import modele.Promotion;
+
 public class VuePrincipale extends JFrame {
 	
 	public static void main(String[] args) {
 		
-		VuePrincipale fen = new VuePrincipale();
+		Promotion promo = new Promotion();
+		promo.loadFileCSV();
 		
+		VuePrincipale fen = new VuePrincipale(promo);
 		fen.setVisible(true);
 		//fen.setResizable(false);
 	}
 	
     private JDesktopPane pano;
 	private GridBagConstraints cont;
+	private Promotion promo;
 	
 	private VueFormulaire form;
 	private VueListe liste;
+	private VueCamembert camembert;
 	
-	public VuePrincipale() {
+	public VuePrincipale( Promotion promo) {
 
+		this.promo = promo;
 		// Titre fenêtre et fermeture la fenêtre
         this.setTitle("Promo 2A G3");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,8 +51,11 @@ public class VuePrincipale extends JFrame {
 		form = new VueFormulaire();        
         form.setVisible(true);
         
-        liste = new VueListe();
+        liste = new VueListe(promo);
         liste.setVisible(true);
+        
+        camembert = new VueCamembert(promo);
+        camembert.setVisible(true);
         
         // Placement        
         this.setContentPane(pano);
@@ -53,12 +63,14 @@ public class VuePrincipale extends JFrame {
         pano.add(form);
         form.setLocation(0,0);
         
+        pano.add(camembert);
+        camembert.setLocation(0, form.getHeight());
+        
         pano.add(liste);
-        liste.setLocation(0, form.getHeight());
+        liste.setLocation(camembert.getWidth(), form.getHeight());
         
         // Réglage taille fenêtre
-        this.setSize(1000, 600);
-        //this.pack();
+        this.setSize(1000, 650);
 		
 	}
 }

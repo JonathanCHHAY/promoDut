@@ -5,20 +5,32 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import modele.Etudiant;
+import modele.Promotion;
 
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
-public class VueCamembertChart {
+public class VueCamembertChart extends ChartPanel{
+
+	private Promotion promo;
 	
+	private ChartPanel chartpano;
+	private JFreeChart piechart ;
 	public DefaultPieDataset pieDataset;
+	
+	public VueCamembertChart(Promotion promo) {
+		
+		super
+		this.promo = promo;
+	}
 	
 	public void genereData() {
 		
-		//pieDataSet = new DefaultPieDataset();
+		pieDataset = new DefaultPieDataset();
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
-		/*
-		ArrayList<Etudiant> list = promo.getListeEtudiant();
+		ArrayList<Etudiant> list = promo.getListeEtudiants();
 		
 		for( int i = 0 ; i < list.size() ; i++ ) {
 			
@@ -39,8 +51,7 @@ public class VueCamembertChart {
 		
 		for( int i = 0 ; i < t.length ; i++ ) {
 			
-			//pieDataSet.setValue((String) t[i], map.get((String) t[i]));
+			pieDataset.setValue((String) t[i], map.get((String) t[i]));
 		}
-		*/
 	}
 }
