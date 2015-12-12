@@ -19,13 +19,16 @@ import org.jfree.data.general.DefaultPieDataset;
 
 public class VueCamembert extends JInternalFrame {
 	
+	private Camembert cam;
+	private Promotion promo;
 	
 	public VueCamembert(Promotion promo) {
 
 		this.setTitle("Dpts Origine");
 		
-		Camembert cam = new Camembert(promo);
+		cam = new Camembert(promo);
 		this.add(cam);
+		this.promo = promo;
 		
 		this.pack();
 		this.setVisible(true);
@@ -34,7 +37,6 @@ public class VueCamembert extends JInternalFrame {
 
 	private class Camembert extends ChartPanel{
 			
-
 		private Promotion promo;
 			
 		private ChartPanel chartpano;
