@@ -53,7 +53,7 @@ public class VueCamembert extends JInternalFrame {
 		public void init(){
 			
 			piechart = ChartFactory.createPieChart3D(
-		            "Dpts d'origine",  // chart title
+		            "Répartition géographique",  // chart title
 		            pieDataset,                // data
 		            true,                   // include legend
 		            true,

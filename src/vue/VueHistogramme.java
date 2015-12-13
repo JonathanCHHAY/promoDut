@@ -37,7 +37,7 @@ public class VueHistogramme extends JInternalFrame {
 	}
 	
 	private class Histogramme extends ChartPanel {
-
+		
 		private Promotion promo;
 		
 		private CategoryDataset dataset;
@@ -74,6 +74,12 @@ public class VueHistogramme extends JInternalFrame {
 			
 			ArrayList<Etudiant> list = promo.getListeEtudiants();
 			
+			map.put("S", 0);
+			map.put("ES", 0);
+			map.put("STI", 0);
+			map.put("Etr", 0);
+			map.put("Autre", 0);
+			
 			for( int i = 0 ; i < list.size() ; i++ ) {
 				
 				if ( map.get(list.get(i).getSerieBac()) != null) {
@@ -92,15 +98,20 @@ public class VueHistogramme extends JInternalFrame {
 			Arrays.sort(t);
 			
 			try {
+				String bacs[] = {"S", "ES", "STI", "STG", "Etr", "Autre"};
+				String serie[] = {""};
+				
 				double datas[][] = new double[6][1];
 				datas[0][0] = map.get("S");
 				//System.out.println(map.get("S"));
 				//System.out.println(datas[0][0]);
 				datas[1][0] = map.get("ES");
 				datas[2][0] = map.get("STI");
+				datas[3][0] = map.get("Etr");
+				datas[4][0] = map.get("Autre");
 				//datas[2][0] = map.get("STL");
 
-				dataset = DatasetUtilities.createCategoryDataset("", " ", datas);
+				dataset = DatasetUtilities.createCategoryDataset(bacs, serie, datas);
 			}
 			
 			catch (java.lang.NullPointerException e) {

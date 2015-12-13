@@ -74,7 +74,7 @@ public class VuePrincipale extends JFrame {
         histogramme.setLocation(camembert.getWidth(), form.getHeight());
         
         pano.add(liste);
-        liste.setLocation(camembert.getWidth(), 0);
+        liste.setLocation(form.getWidth(), 0);
         
         // Réglage taille fenêtre
         this.setSize(1500, 650);
