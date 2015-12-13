@@ -16,7 +16,7 @@ import javax.swing.ListSelectionModel;
 import modele.Etudiant;
 import modele.Promotion;
 
-public class VueListe extends JInternalFrame {
+public class VueListe extends JInternalFrame implements Observateur {
 
 	private JList jListe;
 	private ArrayList<String> listeEtu;
@@ -40,6 +40,8 @@ public class VueListe extends JInternalFrame {
 				System.out.println("Suppr d'un étu (depuis liste)");
 			}
 		});
+		
+		promo.addObservateur(this);
 	}
 	
 	public void init() {
@@ -86,6 +88,12 @@ public class VueListe extends JInternalFrame {
 			//listeEtu[i] = etu.getId() + " - " + etu.getNom() + " " + etu.getPrenom() + " (" + etu.getDpt() +  " )";
 		}
 		
+		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
 		
 	}
 }

@@ -17,7 +17,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
 
-public class VueCamembert extends JInternalFrame {
+public class VueCamembert extends JInternalFrame implements Observateur {
 	
 	private Camembert cam;
 	private Promotion promo;
@@ -29,6 +29,8 @@ public class VueCamembert extends JInternalFrame {
 		cam = new Camembert(promo);
 		this.add(cam);
 		this.promo = promo;
+		
+		promo.addObservateur(this);
 		
 		this.pack();
 	}
@@ -102,5 +104,12 @@ public class VueCamembert extends JInternalFrame {
 			}
 		}
 	
+	}
+
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 }

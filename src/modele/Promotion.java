@@ -15,14 +15,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 
+import vue.Observateur;
+
 
 /**
  *
  * @author Effantin
  */
-public class Promotion {
+public class Promotion implements Observable{
 
     private ArrayList<Etudiant> list;
+    private ArrayList<Observateur> listeObs;
 
     public Promotion() {
         list = new ArrayList<Etudiant>();
@@ -92,4 +95,27 @@ public class Promotion {
             System.out.println("Probleme import csv");
         }
     }
+
+	@Override
+	public void addObservateur(Observateur obs) {
+		
+		if ( listeObs == null ) {
+			listeObs = new ArrayList<Observateur>();
+		}
+		
+		listeObs.add(obs);
+		
+	}
+
+	@Override
+	public void removeObservateur(Observateur obs) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyObservateurs() {
+		// TODO Auto-generated method stub
+		
+	}
 }

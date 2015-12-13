@@ -20,7 +20,7 @@ import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xml.DatasetReader;
 
-public class VueHistogramme extends JInternalFrame {
+public class VueHistogramme extends JInternalFrame implements Observateur {
 
 	private Promotion promo;
 	Histogramme histo;
@@ -32,6 +32,9 @@ public class VueHistogramme extends JInternalFrame {
 		
 		this.histo = new Histogramme(promo);
 		this.add(histo);
+		
+		promo.addObservateur(this);
+		
 		this.pack();
 		
 	}
@@ -122,5 +125,11 @@ public class VueHistogramme extends JInternalFrame {
 	}
 	
 	
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 }
