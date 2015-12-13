@@ -1,29 +1,14 @@
 package vue;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Point;
-
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
 import modele.Promotion;
 
+@SuppressWarnings("serial")
 public class VuePrincipale extends JFrame {
 	
-	public static void main(String[] args) {
-		
-		Promotion promo = new Promotion();
-		promo.loadFileCSV();
-		
-		VuePrincipale fen = new VuePrincipale(promo);
-		fen.setVisible(true);
-		//fen.setResizable(false);
-	}
-	
     private JDesktopPane pano;
-	private GridBagConstraints cont;
 	private Promotion promo;
 	
 	private VueFormulaire form;
@@ -38,7 +23,6 @@ public class VuePrincipale extends JFrame {
         this.setTitle("Promo 2A G3");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-		cont = new GridBagConstraints();
         init();
         
 	}
