@@ -110,13 +110,15 @@ public class Promotion implements Observable{
 
 	@Override
 	public void removeObservateur(Observateur obs) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void notifyObservateurs() {
-		// TODO Auto-generated method stub
-		
+
+		for (int i = 0 ; i < listeObs.size() ; i++) {
+			
+			listeObs.get(i).update();
+		}
 	}
 }

@@ -12,7 +12,7 @@ public class ControleurSuppressionListe extends Controleur{
 	}
 	
 	@Override
-	public void control(ArrayList<String> controlleurs) {
+	public void control(ArrayList<String> donnees) {
 		// TODO Auto-generated method stub
 		
 	}

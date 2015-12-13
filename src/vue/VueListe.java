@@ -45,7 +45,8 @@ public class VueListe extends JInternalFrame implements Observateur {
 	}
 	
 	public void init() {
-		
+				
+		pano = new JPanel();
 		listeEtu = new ArrayList<String>();
 		btSuppr = new JButton("Supprimer");
 		loadListe();
@@ -58,19 +59,19 @@ public class VueListe extends JInternalFrame implements Observateur {
 		JScrollPane scrollPane = new JScrollPane(jListe);
 		jListe.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		
-		this.setLayout(new GridBagLayout());
+		pano.setLayout(new GridBagLayout());
 		GridBagConstraints cont = new GridBagConstraints();
 		cont.fill = GridBagConstraints.BOTH;
 		cont.gridx = 0;
 		cont.gridy = 0;
 		
-		this.add(scrollPane, cont);
+		pano.add(scrollPane, cont);
 		
 		cont.gridx = 0;
 		cont.gridy = 1;
-		this.add(btSuppr, cont);
+		pano.add(btSuppr, cont);
 		
+		this.setContentPane(pano);
 		this.pack();
 	}
 	
@@ -84,7 +85,7 @@ public class VueListe extends JInternalFrame implements Observateur {
 		for (int i = 0 ; i < etus.size() ; i++ ) {
 			
 			 etu = etus.get(i); // curseur sur la liste d'étudiant à l'indice i
-			listeEtu.add(etu.getId() + " - " + etu.getNom() + " " + etu.getPrenom() + " (" + etu.getDpt() +  " )");
+			listeEtu.add(etu.getId() + " - " + etu.getNom() + " " + etu.getPrenom() + " (" + etu.getDpt() +  ")");
 			//listeEtu[i] = etu.getId() + " - " + etu.getNom() + " " + etu.getPrenom() + " (" + etu.getDpt() +  " )";
 		}
 		
@@ -93,7 +94,8 @@ public class VueListe extends JInternalFrame implements Observateur {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		
+		this.pano.removeAll();
+		init();
 	}
 }

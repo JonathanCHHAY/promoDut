@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,19 +13,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controleur.Controleur;
+
 public class VueFormulaire extends JInternalFrame {
 
     private JLabel lbTitreAjEtu, lbTitreSupprEtu, lbNumEtuAj, lbNumEtuSuppr, lbPrenom, lbNom, lbBac, lbDpt ;
-	private String numEtu, prenom, nom ;
+	private ArrayList<String> donnees;
     private JTextField tfNumAj, tfNumSuppr, tfPrenom, tfNom  ;
     private JButton btAjout, btSuppr ;
     private JComboBox<String> listeBac, listeDpt ;
     
     private GridBagConstraints cont;
     private JPanel pano;
+    
+    private Controleur controlAj;
+    private Controleur controlSuppr;
 
 	public VueFormulaire() {
 
+		this.controlAj = null;
+		this.controlSuppr = null;
+		
         this.setTitle("Saisie d'étudiants");
         
 		cont = new GridBagConstraints();
@@ -34,12 +43,22 @@ public class VueFormulaire extends JInternalFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+
+				donnees.clear();
 				
-				System.out.println("Aj d'un étu");
+				// On récupère les données des champs
+				donnees.add( tfNumAj.getText() );
+				donnees.add( tfPrenom.getText() );
+				donnees.add( tfNom.getText() );
+				donnees.add(listeBac.getSelectedItem().toString());
+				donnees.add(listeDpt.getSelectedItem().toString());
+				
+				controlAj.control(donnees);
 			}
 		});
 		
 		btSuppr.addActionListener( new ActionListener() {
+			
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -54,6 +73,8 @@ public class VueFormulaire extends JInternalFrame {
 		// Création d'un nouveau panneau et des éléments
 		pano = new JPanel();
 		pano.setLayout(new GridBagLayout());
+		
+		donnees = new ArrayList<String>();
 		
 		lbTitreAjEtu = new JLabel("Ajout d'un étudiant :");
 		lbTitreSupprEtu = new JLabel("Supression d'un étudiant :");
@@ -89,7 +110,15 @@ public class VueFormulaire extends JInternalFrame {
 				listeDpt.addItem("2B");
 			}
 			else {
-				listeDpt.addItem(Integer.toString(i));
+				
+				// Pour les nombres < à 10 on rajoute un 0 au début
+				if( i < 10 ) {
+					listeDpt.addItem( "0" + Integer.toString(i));
+				}
+				
+				else {
+					listeDpt.addItem(Integer.toString(i));
+				}
 			}
 		}
 		
@@ -175,5 +204,11 @@ public class VueFormulaire extends JInternalFrame {
         this.setContentPane(pano);
         this.pack(); // redim auto
         
+	}
+	
+	public void setControl( Controleur controlAj, Controleur controlSuppr ) {
+		
+		this.controlAj = controlAj;
+		this.controlSuppr = controlSuppr;
 	}
 }
