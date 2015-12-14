@@ -30,13 +30,24 @@ public class VueHistogramme extends JInternalFrame implements Observateur {
 		this.promo = promo;
 		this.setTitle("Bacs d'origine");
 		
-		this.histo = new Histogramme(promo);
-		this.add(histo);
+		init();
 		
 		promo.addObservateur(this);
 		
-		this.pack();
+	}
+	
+	public void init() {
 		
+		this.getContentPane().removeAll();
+		this.histo = new Histogramme(promo);
+		this.add(histo);
+		this.pack();
+	}
+	
+	@Override
+	public void update() {
+
+		init();
 	}
 	
 	private class Histogramme extends ChartPanel {
@@ -77,9 +88,11 @@ public class VueHistogramme extends JInternalFrame implements Observateur {
 			
 			ArrayList<Etudiant> list = promo.getListeEtudiants();
 			
+			// On créer chacun des colonnes
 			map.put("S", 0);
 			map.put("ES", 0);
 			map.put("STI", 0);
+			map.put("STG", 0);
 			map.put("Etr", 0);
 			map.put("Autre", 0);
 			
@@ -101,6 +114,7 @@ public class VueHistogramme extends JInternalFrame implements Observateur {
 			Arrays.sort(t);
 			
 			try {
+				// On nomme les noms des colonnes
 				String bacs[] = {"S", "ES", "STI", "STG", "Etr", "Autre"};
 				String serie[] = {""};
 				
@@ -110,8 +124,9 @@ public class VueHistogramme extends JInternalFrame implements Observateur {
 				//System.out.println(datas[0][0]);
 				datas[1][0] = map.get("ES");
 				datas[2][0] = map.get("STI");
-				datas[3][0] = map.get("Etr");
-				datas[4][0] = map.get("Autre");
+				datas[3][0] = map.get("STG");
+				datas[4][0] = map.get("Etr");
+				datas[5][0] = map.get("Autre");
 				//datas[2][0] = map.get("STL");
 
 				dataset = DatasetUtilities.createCategoryDataset(bacs, serie, datas);
@@ -127,9 +142,4 @@ public class VueHistogramme extends JInternalFrame implements Observateur {
 	
 	}
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
 }

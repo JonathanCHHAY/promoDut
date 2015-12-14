@@ -25,17 +25,32 @@ public class VueCamembert extends JInternalFrame implements Observateur {
 	public VueCamembert(Promotion promo) {
 
 		this.setTitle("Dpts Origine");
-		
-		cam = new Camembert(promo);
-		this.add(cam);
 		this.promo = promo;
 		
-		promo.addObservateur(this);
+		init();
 		
+		promo.addObservateur(this);
+	}
+	
+	public void init() {
+		
+		// On supprime tous les éléments du précédent panneau
+		this.getContentPane().removeAll();
+		JPanel pano = new JPanel();
+		
+		cam = new Camembert(promo);
+		pano.add(cam);
+
+		this.setContentPane(pano);
 		this.pack();
 	}
 	
-
+	@Override
+	public void update() {
+		
+		init();
+	}
+	
 	private class Camembert extends ChartPanel{
 			
 		private Promotion promo;
@@ -106,10 +121,4 @@ public class VueCamembert extends JInternalFrame implements Observateur {
 	
 	}
 
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
 }

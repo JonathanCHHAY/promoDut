@@ -13,8 +13,11 @@ public class ControleurSuppressionListe extends Controleur{
 	
 	@Override
 	public void control(ArrayList<String> donnees) {
-		// TODO Auto-generated method stub
 		
+		System.out.println("Suppr de l'étu n°" + donnees.get(0) );
+		
+		promo.removeEtudiant( promo.searchEtudiant( donnees.get(0) ) );
+		promo.notifyObservateurs();
 	}
 
 }

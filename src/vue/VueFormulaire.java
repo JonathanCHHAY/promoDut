@@ -53,6 +53,7 @@ public class VueFormulaire extends JInternalFrame {
 				donnees.add(listeBac.getSelectedItem().toString());
 				donnees.add(listeDpt.getSelectedItem().toString());
 				
+				// On controle les donnes avant d'actualiser le modèle et la vue
 				controlAj.control(donnees);
 			}
 		});
@@ -62,8 +63,11 @@ public class VueFormulaire extends JInternalFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+
+				donnees.clear();
 				
-				System.out.println("Suppr d'un étu");
+				donnees.add( tfNumSuppr.getText() );
+				controlSuppr.control(donnees);
 			}
 		});
 	}
@@ -96,7 +100,7 @@ public class VueFormulaire extends JInternalFrame {
 		tfNumAj.setColumns(10);
 		tfNumSuppr.setColumns(10);
 		
-		String[] bacs = { "S", "STI", "ES" };
+		String[] bacs = { "S", "ES", "STI", "STG", "Etr", "Autre" };
 		listeBac = new JComboBox<String>( bacs );
 		
 		listeDpt = new JComboBox<String>();

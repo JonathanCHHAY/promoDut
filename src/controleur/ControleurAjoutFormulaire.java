@@ -15,6 +15,7 @@ public class ControleurAjoutFormulaire extends Controleur {
 	@Override
 	public void control(ArrayList<String> donnees) {
 
+		// On met à jour le modèle
 		System.out.println("Aj d'un étu : " +
 				donnees.get(0) + " " +
 				donnees.get(1) + " " +
@@ -23,13 +24,18 @@ public class ControleurAjoutFormulaire extends Controleur {
 				"Dpt " + donnees.get(4)
 		);
 		
-		promo.addEtudiant( new Etudiant(donnees.get(0), 
-				donnees.get(1), 
-				donnees.get(2), 
-				donnees.get(3), 
-				donnees.get(4)) 
-		);
+		// On vérifie si l'étudiant n'existe pas déjà dans la base
+		if ( promo.searchEtudiant(donnees.get(0) ) == null ) {
+			
+			promo.addEtudiant( new Etudiant(donnees.get(0), 
+					donnees.get(1), 
+					donnees.get(2), 
+					donnees.get(3), 
+					donnees.get(4)) 
+			);
+		}
 		
+		// On met à jour les vues
 		promo.notifyObservateurs();
 		
 	}

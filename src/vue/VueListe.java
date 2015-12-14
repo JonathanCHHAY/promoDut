@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
+import controleur.Controleur;
+
 import modele.Etudiant;
 import modele.Promotion;
 
@@ -21,15 +23,21 @@ public class VueListe extends JInternalFrame implements Observateur {
 	private JList jListe;
 	private ArrayList<String> listeEtu;
 	private JButton btSuppr;
+	
+	ArrayList<String> donnees;
 	//private String[] listeEtu ;
 	private Promotion promo;
 	
     //private GridBagConstraints cont;
     private JPanel pano;
+    private Controleur SupprListe;
 		
 	public VueListe(Promotion promo) {
 		
 		this.promo = promo;
+		donnees = new ArrayList<String>();
+		btSuppr = new JButton("Supprimer"); // On créer le bouton ici sinon il sera supprimé dans l'update
+		
 		init();
 		
 		btSuppr.addActionListener( new ActionListener() {
@@ -37,7 +45,14 @@ public class VueListe extends JInternalFrame implements Observateur {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				System.out.println("Suppr d'un étu (depuis liste)");
+				donnees.clear();
+				// On récupère le numéro de l'étudiant
+				donnees.add(jListe.getSelectedValue().toString().substring(0, 3));
+
+				System.out.println("Suppr de l'étu n°" + donnees.get(0) );
+				
+				SupprListe.control(donnees);
+				
 			}
 		});
 		
@@ -48,7 +63,6 @@ public class VueListe extends JInternalFrame implements Observateur {
 				
 		pano = new JPanel();
 		listeEtu = new ArrayList<String>();
-		btSuppr = new JButton("Supprimer");
 		loadListe();
 		
 		jListe = new JList(listeEtu.toArray());
@@ -74,6 +88,18 @@ public class VueListe extends JInternalFrame implements Observateur {
 		this.setContentPane(pano);
 		this.pack();
 	}
+
+	@Override
+	public void update() {
+		
+		this.pano.removeAll();
+		init();
+	}
+	
+	public void setControl( Controleur SupprListe ) {
+		
+		this.SupprListe = SupprListe;
+	}
 	
 	/** Permet d'enregistrer les infos des étudiants dans une liste de string*/
 	public void loadListe() {
@@ -92,10 +118,4 @@ public class VueListe extends JInternalFrame implements Observateur {
 		
 	}
 
-	@Override
-	public void update() {
-		
-		this.pano.removeAll();
-		init();
-	}
 }

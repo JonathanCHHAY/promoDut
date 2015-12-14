@@ -45,6 +45,7 @@ public class VuePrincipale extends JFrame {
         form.setVisible(true);
         
         liste = new VueListe(promo);
+        liste.setControl(controleurs.get(2));
         liste.setVisible(true);
         
         camembert = new VueCamembert(promo);
