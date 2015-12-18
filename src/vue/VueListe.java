@@ -46,12 +46,17 @@ public class VueListe extends JInternalFrame implements Observateur {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				donnees.clear();
-				// On récupère le numéro de l'étudiant
-				donnees.add(jListe.getSelectedValue().toString().substring(0, 3));
-
-				System.out.println("Suppr de l'étu n°" + donnees.get(0) );
 				
-				SupprListe.control(donnees);
+				// On vérifie si un élément est sélectionné dans la liste
+				if (jListe.getSelectedValue() != null ) {
+
+					// On récupère le numéro de l'étudiant
+					donnees.add(jListe.getSelectedValue().toString().substring(0, 3));
+					System.out.println("Suppr de l'étu n°" + donnees.get(0) );
+					
+					SupprListe.control(donnees);
+				}
+				
 				
 			}
 		});

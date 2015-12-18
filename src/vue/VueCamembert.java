@@ -16,6 +16,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.ui.RectangleInsets;
 
 public class VueCamembert extends JInternalFrame implements Observateur {
 	

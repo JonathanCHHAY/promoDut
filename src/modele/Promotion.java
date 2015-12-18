@@ -111,6 +111,7 @@ public class Promotion implements Observable{
 	@Override
 	public void removeObservateur(Observateur obs) {
 		
+		
 	}
 
 	@Override

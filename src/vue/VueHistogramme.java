@@ -79,6 +79,7 @@ public class VueHistogramme extends JInternalFrame implements Observateur {
 		            true,                     // tooltips
 		            false                     // urls
 		        );
+			
 		}
 		
 		public void genereData() {
