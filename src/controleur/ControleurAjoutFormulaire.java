@@ -44,14 +44,27 @@ public class ControleurAjoutFormulaire extends Controleur {
 		// Erreur si le numéro de l'étudiant n'est pas un nombre à 3 chiffres
 		else if ( donnees.get(0).length() > 3 ) {
 			
-			JOptionPane.showConfirmDialog(null, "Erreur, votre numéro doit être un numéro à 3 chiffres.", null, JOptionPane.CLOSED_OPTION);
+			JOptionPane.showConfirmDialog(null, "Erreur, le numéro étudiant ne peut comporter plus de 3 chiffres.", null, JOptionPane.CLOSED_OPTION);
 		}
 		
 		else {
+
+			// On met le numéro de l'étudiant sous la forme d'un nombre à trois chiffre (001 ou 011 ou 111)
+			String num = donnees.get(0);
+			
+			if (Integer.valueOf(donnees.get(0) ) < 10 && donnees.get(0).length() == 1) {
+				
+				num = "00" + donnees.get(0);
+			}
+			
+			else if (Integer.valueOf(donnees.get(0) ) < 100 && donnees.get(0).length() == 2) {
+				
+				num = "0" + donnees.get(0);
+			}
 						
 			// On met à jour le modèle
 			System.out.println("Aj de l'étu : " +
-					donnees.get(0) + " " +
+					num + " " +
 					donnees.get(1) + " " +
 					donnees.get(2) + " " +
 					"Bac " + donnees.get(3) + " " +
@@ -59,7 +72,8 @@ public class ControleurAjoutFormulaire extends Controleur {
 			);
 			
 				
-			promo.addEtudiant( new Etudiant(donnees.get(0), 
+			promo.addEtudiant( new Etudiant(
+					num, 
 					donnees.get(1).toUpperCase(), 
 					donnees.get(2).toUpperCase(), 
 					donnees.get(3), 

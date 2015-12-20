@@ -44,27 +44,10 @@ public class VueFormulaire extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
+				// On récupère les données des champs
 				donnees.clear();
 				
-				// On récupère les données des champs
-				// On met le numéro de l'étudiant sous la forme d'un nombre à trois chiffre (001 ou 011 ou 111)
-				if (Integer.valueOf(tfNumAj.getText() ) < 10 && tfNumAj.getText().length() == 1) {
-					
-					donnees.add( "00" + tfNumAj.getText() );
-				}
-				
-				else if (Integer.valueOf(tfNumAj.getText() ) < 100 && tfNumAj.getText().length() == 2) {
-					
-					donnees.add( "0" + tfNumAj.getText() );
-				}
-				
-				else {
-					
-					// Si le nombre fait plus de 3 chiffres il y aura des problèmes lors de la suppression
-					// mais cela est géré par le contrôlleur
-					donnees.add( tfNumAj.getText() );
-				}
-				
+				donnees.add( tfNumAj.getText() );
 				donnees.add( tfPrenom.getText() );
 				donnees.add( tfNom.getText() );
 				donnees.add(listeBac.getSelectedItem().toString());
